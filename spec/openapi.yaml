@@ -1,0 +1,47 @@
+---
+openapi: 3.0.2
+info:
+  title: Test
+  version: 1.0.0
+paths:
+  /test:
+    get:
+      responses:
+        200:
+          description: Test
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+components:
+  schemas:
+    Cat:
+      allOf:
+      - $ref: '#/components/schemas/Pet'
+      - type: object
+        properties:
+          name:
+            type: string
+    Dog:
+      allOf:
+      - $ref: '#/components/schemas/Pet'
+      - type: object
+        properties:
+          bark:
+            type: string
+    Lizard:
+      allOf:
+      - $ref: '#/components/schemas/Pet'
+      - type: object
+        properties:
+          lovesRocks:
+            type: boolean
+    Pet:
+      required:
+      - pet_type
+      type: object
+      properties:
+        pet_type:
+          type: string
+      discriminator:
+        propertyName: pet_type
